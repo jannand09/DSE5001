@@ -1,0 +1,187 @@
+---
+title: "Annand_assignment5"
+author: "Joseph Annand"
+date: "2023-06-11"
+output:
+  word_document: default
+  html_document: default
+---
+# Libraries ---------------------------------------
+
+```{r}
+library("VennDiagram")
+```
+
+
+# Question 3.8 ------------------------------------
+
+a.) Living under the poverty line and speaking a foreign language at home are not disjoint, as 4.2% of Americans surveyed fall into both categories.
+
+b.)
+```{r}
+# https://www.geeksforgeeks.org/how-to-create-a-venn-diagram-in-r/
+
+# move to new plotting page
+grid.newpage()
+
+# create pairwise Venn diagram
+draw.pairwise.venn(area1=14.6, area2=20.7, cross.area=4.2,
+                   category=c("Poverty", "Foreign Lang"), fill=c("Blue", "Yellow"))
+```
+
+c.)
+```{r}
+# percent below poverty line minus percent below poverty line and speaks foreign language
+# gives percent of families below the poverty line that only speak English at home
+english_and_below <- 14.6 - 4.2
+english_and_below
+```
+
+10.4% of Americans live below the poverty line and only speak English at home.
+
+d.)
+```{r}
+#General Addition rule to determine probability of families that speak a foreign language
+# at home or fall below the poverty line
+foreign_or_below <- 14.6 + 20.7 - 4.2
+foreign_or_below
+```
+
+31.1% of Americans live below the poverty line or speak a foreign language at home.
+
+e.)
+```{r}
+# Families that only speak English is total families minus families that speak foreign lang at home
+english_only <- 100 - 20.7
+# subtract percentage of English only speaking families below poverty line from
+# total English only speaking families
+english_only - english_and_below
+```
+
+68.9% of Americans are above the poverty line and only speak English at home.
+
+f.)
+```{r}
+below_poverty <- 14.6 / 100
+foreign_at_home <- 20.7 / 100
+
+foreign_and_below <- below_poverty * foreign_at_home * 100
+foreign_and_below
+foreign_and_below == 4.2
+```
+
+Falling below the poverty and speaking a foreign language are not independent processes because the equation for the multiplication rule for independent processes does not hold.
+
+# Question 3.12 -----------------------------------
+a.)
+```{r}
+no_absences <- 100 - 25 - 15 - 28
+no_absences
+```
+
+There is a 32% chance that a student picked at random did not miss a single day fo school.
+
+b.)
+```{r}
+no_more_one <- 100 - 15 - 28
+no_more_one
+```
+
+There is a 57% chance that a student chosen at random misses no more than one day of school.
+
+c.)
+```{r}
+least_one_absence <- 25 + 15 + 28
+least_one_absence
+```
+
+There is a 68% chance a student chosen at random misses at least one day of school.
+
+d.)
+```{r}
+0.32 * 0.32
+```
+
+Assuming that the attendance of one child does not affect the attendance of the second, the attendance of each child is independent of the other. The probability that both children do not miss a day of school due to sickness is 10.24%.
+
+e.)
+```{r}
+0.68 * 0.68
+```
+
+Assuming that the attendance of one child does not affect the attendance of the second, the attendance of each child is independent of the other. The probability that both children miss at least one day of school due to sickness is 46.2%.
+
+f.)
+The assumption that the two children missing school due to sickness are independent events does not seem reasonable in actuality. When one child misses school due to sickness, the probability of the other child missing school due to sickness is higher than that of other elementary school students because the two children live together.
+
+# Question 3.16 -----------------------------------
+
+a.) Being in excellent health and having health coverage are not mutually exclusive. These events may happen at the same time, as their are participants surveyed who do not have health coverage and are in excellent health.
+
+b.) The probability of a randomly selected indivisual having excellent health is 23.29%.
+
+c.) 
+```{r}
+# probability of excellent health and coverage
+exc_coverage <- 0.2099
+
+# probability of coverage
+coverage <- 0.8738
+
+# P(health is excellent and coverage is yes | coverage is yes)
+p <- exc_coverage / coverage
+p
+```
+
+The probability that a randomly chosen individual has excellent health given that he has health coverage is 24.02%.
+
+d.) 
+```{r}
+# probability of excellent health and no coverage
+exc_no_coverage <- 0.0230
+
+# probability of no coverage
+no_coverage <- 0.1262
+
+# P(health is excellent and coverage is no | coverage is no)
+p2 <- exc_no_coverage / no_coverage
+p2
+```
+
+The probability that a randomly chosen individual has excellent health given that they have no health coverage is 18.23%.
+
+e.)
+```{r}
+# probability having excellent health
+excellent_health <- 0.2329
+
+  
+# determine value of P(A and B) if they are independent processes
+# P(A and B) = P(excellent health) x P(having coverage)
+p_independent <- excellent_health * coverage
+p_independent
+
+# compare to P(A and B) using general multiplication rule
+# P(A and B) = P(health is excellent given coverage is yes) x P(coverage is yes)
+p
+p == p_independent
+```
+
+Having excellent health and having health coverage do not appear to be independent.
+
+# Question 3.22 -----------------------------------
+```{r}
+data <- matrix(c(37, 44, 81, 16, 3, 19, 53, 47, 100), ncol=3)
+
+rownames(data) <- c("In Favor", "Against", "Total")
+colnames(data) <- c("College Degree", "No College Degree", "Total")
+
+data <- as.table(data)
+
+data
+
+p4 <- 37 / 81
+p4
+```
+
+P(in favor of Scott Walker given college degree is yes) is 45.68%.

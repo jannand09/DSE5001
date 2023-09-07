@@ -1,0 +1,162 @@
+---
+title: "annand_assignment6"
+author: "Joseph Annand"
+date: "2023-06-18"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Question 5.2
+
+## Part A
+proportion
+
+## Part B
+mean
+
+## Part C
+proportion
+
+## Part D
+proportion
+
+## Part E
+mean
+
+# Question 5.4
+
+## Part A
+
+The population of interest is the population of adults in the United States.
+
+## Part B
+
+The parameter of interest is the proportion of adults in the United States that could not cover an unexpected $400 expense without borrowing money or going into debt.
+
+## Part C
+```{r}
+p_sample <- 322 / 765
+p_sample
+```
+
+The point estimate for the parameter is 0.42.
+
+## Part D
+
+The standard error is the statistic used to measure the uncertainty of the point estimate.
+
+## Part E
+```{r}
+# Check success-failure condition for Central Limit Theorem
+check_clt <- function(n, p) {
+  return (n * p >= 10 && n * (1 - p) >= 10)
+}
+```
+
+```{r}
+find_std_error <- function(p, n) {
+  return (sqrt((p * (1 - p)) / n))
+}
+```
+
+
+```{r}
+n <- 765
+
+check_clt(n, p_sample)
+
+find_std_error(p_sample, n)
+```
+
+## Part F
+Yes, the cable news pundit would be surprised because the point estimate is 42% and the standard error, or variability of the point estimate, is 1.8%., so their guess of 50% looks to be incorrect.
+
+## Part G
+```{r}
+p_population <- .40
+
+# Find sample error using population proportion
+find_std_error(p_population, n)
+```
+
+The resulting value of the standard error doe snot change by much when using the population proportion.
+
+# Question 5.10
+
+## Part A
+```{r}
+# Perform hypothesis test using a p-value
+check_hypothesis <- function(p, a) {
+  if (p < a) {
+    print("Reject null hypothesis")
+  } else {
+    print("Fail to reject null hypothesis")
+  }
+}
+```
+
+
+```{r}
+p_sample <- 0.52
+std_error <- 0.024
+
+p_null <- 0.50
+alpha <- 0.01
+
+# Calculate z-score using null value
+z <- (p_sample - p_null) / std_error # standard error does not change much when using null value so the same one from the sample proportion is used here
+
+# Determine the p-value
+p_value <- 2 * pnorm(0.83, lower.tail = FALSE)
+
+# Perform hypothesis check using the p-value
+check_hypothesis(p_value, alpha)
+```
+False, the data does not provide evidence that more than half of U.S adult Twitter users get some news from Twitter. Using a a hypothesis test with a p-value, we fail to reject the null hypothesis that half of U.S. adult Twitter users get some news from Twitter and half do not.
+
+## Part B
+False, the standard error represents the variability of the point estimate. It does not tell us anything about the proportion of all U.S. adult Twitter users included in the study.
+
+## Part C
+False, to reduce the standard error of the estimate, more data should be collected. The equation for the standard error shows that standard error and sample size, n, are inversely related. The larger the sample size, the smaller the standard error; a larger sample size will tend to yield more accurate estimates.
+
+## Part D
+False, a 99% confidence interval will be wider than a 90% confidence interval. The 99% confidence interval will correspond to a larger z-score, and thus a larger margin of error.
+
+# Question 5.22
+```{r}
+p_null <- 0.50
+alpha <- 0.01
+
+n <- 400
+p_sample <- 289 / 400
+
+# Check success-failure condition using null value
+check_clt(n, p_null)
+
+# Find standard error for null value
+std_error_ <- find_std_error(p_null, n)
+
+# Find the z-score for sample proportion on null distribution
+z_ <- (p_sample - p_null) / std_error_
+
+# Calculate the p-value
+p_value_ <- 2 * pnorm(z_, lower.tail = FALSE)
+
+# Compare p_value to alpha and 
+check_hypothesis(p_value_, alpha)
+```
+
+The hypothesis test using a p-value concludes that we may reject the null hypothesis that half of students get enough sleep and the other do not get enough sleep, and we may conclude that the point estimate of 0.7225 is statistically different than 0.50.
+
+## Added after reading Andrews Ch. 8
+```{r}
+null_binom_model <- binom.test(x = 289, n = 400, p = 0.50)
+null_binom_model$p.value
+```
+

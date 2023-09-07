@@ -1,0 +1,146 @@
+---
+title: "Annand_assignment4"
+author: "Joseph Annand"
+date: "2023-06-02"
+output:
+  word_document: default
+  html_document: default
+---
+# Normal Distrubution area function -----------------------------
+```{r}
+# https://r-coder.com/normal-distribution-r/#Plot_Normal_distribution_in_R
+normal_area <- function(mean = 0, sd = 1, lb, ub, acolor = "lightgray", ...) {
+  # Create sequence of 100 equally spaced numbers between mean - 3 and mean + 3  
+  x <- seq(mean - 3 * sd, mean + 3 * sd, length = 100) 
+  
+  # If no lower bound is defined, set lower bound to lower limit of the distribution  
+  if (missing(lb)) {
+      lb <- min(x)
+  }
+  # If no upper bound is defined, set upper bound to upper limit of distribution
+  if (missing(ub)) {
+      ub <- max(x)
+  }
+  
+  # Create empty plot 
+  plot(x, dnorm(x, mean, sd), type = "n", ylab = "")
+  
+  # Initialize sequence between the bounds
+  x2 <- seq(lb, ub, length = 100)
+  # Initialize set of probability density function values of x2
+  y <- dnorm(x2, mean, sd)
+  
+  # Draw the area of interest under the curve 
+  polygon(c(lb, x2, ub), c(0, y, 0), col = acolor)
+  # Plot the normal distribution curve
+  lines(x, dnorm(x, mean, sd), type = "l", ...)
+}
+```
+
+# Question 4.2 --------------------------------------------------
+```{r}
+
+a <- pnorm(-1.13, lower.tail = FALSE)
+a*100
+normal_area(mean = 0, sd = 1, lb = -1.13, acolor = "red", lwd = 2)
+
+```
+
+87.08% of a standard normal distribution is found in Z > -1.13.
+
+```{r}
+b <- pnorm(0.18)
+b*100
+normal_area(mean = 0, sd = 1, ub = 0.18, acolor = "blue", lwd = 2)
+```
+
+57.14% of a standard normal distribution is found in Z > 1.48.
+
+```{r}
+c <- pnorm(8, lower.tail = FALSE)
+c*100
+normal_area(mean = 0, sd = 1, lb = 8, lwd = 2)
+```
+
+6.22 x 10^-14 % of a standard normal distribution is found in Z > 8. Note that because such a small fraction of the distribution is in this region, the graph does not have visible area under the curve representing the region.
+
+```{r}
+d <- pnorm(0.5) - pnorm(-0.5)
+d*100
+normal_area(mean = 0, sd = 1, lb = -0.5, ub = 0.5, acolor = "green", lwd = 2)
+```
+
+38.29% of a standard normal distribution is found in abs(Z) < 0.5.
+
+
+# Question 4.4 --------------------------------------------------
+```{r}
+
+leo_time <- 4948
+mary_time <- 5513
+
+mens_mean <- 4313
+mens_sd <- 583
+
+womens_mean <- 5261
+womens_sd <- 807
+```
+
+Part a:
+```{r}
+paste("N(mu = ", as.character(mens_mean), ", sigma = ", as.character(mens_sd), ")")
+paste("N(mu = ", as.character(womens_mean), ", sigma = ", as.character(womens_sd), ")")
+```
+
+Part b:
+```{r}
+
+z_score_leo <- (leo_time - mens_mean) / mens_sd
+z_score_leo
+z_score_mary <- (mary_time - womens_mean) / womens_sd
+z_score_mary
+```
+
+The Z-score for Leo's time is 1.089, and the Z-score for Mary's time was 0.312. The Z-scores represent their times as a number of standard deviations above or below the mean. Z-scores tell us where their times fall in the distribution of completion times for their respective group. 
+
+Part c:
+
+Mary ranked better in her group based on her Z-score. Mary's time was 0.312 standard deviations above, or slower than, the mean of her group, while Leo's time was 1.089 standard deviations above, or slower than, the mean in his group. Leo's time is slower for his group compared to Mary's
+
+Part d:
+```{r}
+pnorm(z_score_leo, lower.tail = FALSE) * 100
+```
+
+Leo finished faster than 13.8% of his group.
+
+Part e:
+```{r}
+pnorm(z_score_mary, lower.tail = FALSE) * 100 
+```
+
+Mary finished faster than 37.7% of her group.
+
+Part f:
+
+If the distribution was not nearly normal, the Z-scores for Mary's and Leo's times would remain the same given that the means and standard deviations are the same. However, the answers for parts c through e may not be valid. If the distributions of each group are both not nearly normal, the shapes of the curves for the two groups could be different and Mary's and Leo's times cannot be compared using Z-scores; this means the answer in part c using the Z-scores to compare Mary's and Leo's rankings would not be accurate. If the shapes of the curves are vastly different from a normal distribution, the pnorm() function will not accurately calculate the tail areas under the curve and our answers for part d and e will be incorrect.
+
+# Question 4.8 --------------------------------------------------
+
+Part a:
+```{r}
+capm_mean <- 14.7
+capm_sd <- 33
+
+pnorm(0, mean = capm_mean, sd = capm_sd)
+```
+
+The portfolio has a return of less than 0% in 32.80% of years.
+
+Part b:
+```{r}
+# qnorm converts a percentile to a Z-score for a given normal distribution
+qnorm(0.85, mean = capm_mean, sd = capm_sd)
+```
+
+The cutoff for the highest 15% of annual returns wiht this portfolio is 48.90%.

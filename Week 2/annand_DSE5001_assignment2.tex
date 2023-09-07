@@ -1,0 +1,894 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={annand\_DSE5001\_assignment2},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{annand\_DSE5001\_assignment2}
+\author{}
+\date{\vspace{-2.5em}2023-05-19}
+
+\begin{document}
+\maketitle
+
+\hypertarget{import-libraries}{%
+\section{Import libraries}\label{import-libraries}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(readr)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.2     v purrr     1.0.1
+## v forcats   1.0.0     v stringr   1.5.0
+## v ggplot2   3.4.2     v tibble    3.2.1
+## v lubridate 1.9.2     v tidyr     1.3.0
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(psych)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'psych'
+## 
+## The following objects are masked from 'package:ggplot2':
+## 
+##     %+%, alpha
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(moments)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{chapter-3}{%
+\subsection{CHAPTER 3}\label{chapter-3}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weight\_data }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"C:}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Users}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{janna}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{OneDrive}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Documents}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{DSE5001}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Week 2}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{weight.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 6068 Columns: 8
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## chr (1): gender
+## dbl (7): subjectid, height, height_selfreport, weight, weight_selfreport, ag...
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w1 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(weight\_data, subjectid, height, weight, age) }\CommentTok{\# returns specific columns}
+\NormalTok{w1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6,068 x 4
+##    subjectid height weight   age
+##        <dbl>  <dbl>  <dbl> <dbl>
+##  1     10027   178.   81.5    41
+##  2     10032   170.   72.6    35
+##  3     10033   174.   92.9    42
+##  4     10092   166.   79.4    31
+##  5     10093   191.   94.6    21
+##  6     10115   172    80.2    39
+##  7     10117   181   116.     32
+##  8     10237   185    95.4    23
+##  9     10242   178.   99.5    36
+## 10     10244   181.   70.2    23
+## # i 6,058 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w2 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(weight\_data, subjectid, height}\SpecialCharTok{:}\NormalTok{age) }\CommentTok{\# returns subjectid col and all cols between height and age (inclusive)}
+\NormalTok{w2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6,068 x 6
+##    subjectid height height_selfreport weight weight_selfreport   age
+##        <dbl>  <dbl>             <dbl>  <dbl>             <dbl> <dbl>
+##  1     10027   178.              180.   81.5              81.7    41
+##  2     10032   170.              173.   72.6              72.6    35
+##  3     10033   174.              173.   92.9              93.0    42
+##  4     10092   166.              168.   79.4              79.4    31
+##  5     10093   191.              196.   94.6              96.6    21
+##  6     10115   172               175.   80.2              79.4    39
+##  7     10117   181               183.  116.              113.     32
+##  8     10237   185               188.   95.4              95.7    23
+##  9     10242   178.              178.   99.5              99.8    36
+## 10     10244   181.              183.   70.2              72.6    23
+## # i 6,058 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w3 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(weight\_data, }\SpecialCharTok{{-}}\NormalTok{weight\_selfreport) }\CommentTok{\# return data frame without weight\_selfreport col}
+\NormalTok{w3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6,068 x 7
+##    subjectid gender height height_selfreport weight   age  race
+##        <dbl> <chr>   <dbl>             <dbl>  <dbl> <dbl> <dbl>
+##  1     10027 Male     178.              180.   81.5    41     1
+##  2     10032 Male     170.              173.   72.6    35     1
+##  3     10033 Male     174.              173.   92.9    42     2
+##  4     10092 Male     166.              168.   79.4    31     1
+##  5     10093 Male     191.              196.   94.6    21     2
+##  6     10115 Male     172               175.   80.2    39     1
+##  7     10117 Male     181               183.  116.     32     2
+##  8     10237 Male     185               188.   95.4    23     1
+##  9     10242 Male     178.              178.   99.5    36     1
+## 10     10244 Male     181.              183.   70.2    23     1
+## # i 6,058 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w4 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(weight\_data, }\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"w"}\NormalTok{)) }\CommentTok{\# returns all cols that start with w}
+\NormalTok{w4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6,068 x 2
+##    weight weight_selfreport
+##     <dbl>             <dbl>
+##  1   81.5              81.7
+##  2   72.6              72.6
+##  3   92.9              93.0
+##  4   79.4              79.4
+##  5   94.6              96.6
+##  6   80.2              79.4
+##  7  116.              113. 
+##  8   95.4              95.7
+##  9   99.5              99.8
+## 10   70.2              72.6
+## # i 6,058 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w5 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(weight\_data, }\FunctionTok{ends\_with}\NormalTok{(}\StringTok{"t"}\NormalTok{)) }\CommentTok{\# returns all cols that end in t}
+\NormalTok{w5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6,068 x 4
+##    height height_selfreport weight weight_selfreport
+##     <dbl>             <dbl>  <dbl>             <dbl>
+##  1   178.              180.   81.5              81.7
+##  2   170.              173.   72.6              72.6
+##  3   174.              173.   92.9              93.0
+##  4   166.              168.   79.4              79.4
+##  5   191.              196.   94.6              96.6
+##  6   172               175.   80.2              79.4
+##  7   181               183.  116.              113. 
+##  8   185               188.   95.4              95.7
+##  9   178.              178.   99.5              99.8
+## 10   181.              183.   70.2              72.6
+## # i 6,058 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w6 }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(weight\_data, }\FunctionTok{matches}\NormalTok{(}\StringTok{\textquotesingle{}\^{}h|t$\textquotesingle{}}\NormalTok{)) }\CommentTok{\# returns cols that start with h or end in t}
+\NormalTok{w6}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6,068 x 4
+##    height height_selfreport weight weight_selfreport
+##     <dbl>             <dbl>  <dbl>             <dbl>
+##  1   178.              180.   81.5              81.7
+##  2   170.              173.   72.6              72.6
+##  3   174.              173.   92.9              93.0
+##  4   166.              168.   79.4              79.4
+##  5   191.              196.   94.6              96.6
+##  6   172               175.   80.2              79.4
+##  7   181               183.  116.              113. 
+##  8   185               188.   95.4              95.7
+##  9   178.              178.   99.5              99.8
+## 10   181.              183.   70.2              72.6
+## # i 6,058 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w7 }\OtherTok{\textless{}{-}} \FunctionTok{rename}\NormalTok{(weight\_data, }\AttributeTok{gender\_identity=}\NormalTok{gender, }\AttributeTok{ethnicity=}\NormalTok{race) }\CommentTok{\# renames cols}
+\NormalTok{w7}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6,068 x 8
+##    subjectid gender_identity height height_selfreport weight weight_selfreport
+##        <dbl> <chr>            <dbl>             <dbl>  <dbl>             <dbl>
+##  1     10027 Male              178.              180.   81.5              81.7
+##  2     10032 Male              170.              173.   72.6              72.6
+##  3     10033 Male              174.              173.   92.9              93.0
+##  4     10092 Male              166.              168.   79.4              79.4
+##  5     10093 Male              191.              196.   94.6              96.6
+##  6     10115 Male              172               175.   80.2              79.4
+##  7     10117 Male              181               183.  116.              113. 
+##  8     10237 Male              185               188.   95.4              95.7
+##  9     10242 Male              178.              178.   99.5              99.8
+## 10     10244 Male              181.              183.   70.2              72.6
+## # i 6,058 more rows
+## # i 2 more variables: age <dbl>, ethnicity <dbl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w8 }\OtherTok{\textless{}{-}} \FunctionTok{slice}\NormalTok{(weight\_data, }\FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{30}\NormalTok{,}\DecValTok{40}\NormalTok{,}\DecValTok{100}\NormalTok{)) }\CommentTok{\# returns rows 10,20,30,40,and 100}
+\NormalTok{w8}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 8
+##   subjectid gender height height_selfreport weight weight_selfreport   age  race
+##       <dbl> <chr>   <dbl>             <dbl>  <dbl>             <dbl> <dbl> <dbl>
+## 1     10244 Male     181.              183.   70.2              72.6    23     1
+## 2     10310 Male     179.              178.   90.8              91.7    32     1
+## 3     10361 Male     182.              185.   88.2              90.7    33     1
+## 4     10423 Male     174.              175.   88.1              87.6    26     1
+## 5     10701 Male     176.              180.   96.8              97.5    27     1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w9 }\OtherTok{\textless{}{-}} \FunctionTok{slice}\NormalTok{(weight\_data, }\DecValTok{3}\SpecialCharTok{:}\DecValTok{140}\NormalTok{) }\CommentTok{\# returns rows 3 through 140 inclusive}
+\NormalTok{w9}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 138 x 8
+##    subjectid gender height height_selfreport weight weight_selfreport   age
+##        <dbl> <chr>   <dbl>             <dbl>  <dbl>             <dbl> <dbl>
+##  1     10033 Male     174.              173.   92.9              93.0    42
+##  2     10092 Male     166.              168.   79.4              79.4    31
+##  3     10093 Male     191.              196.   94.6              96.6    21
+##  4     10115 Male     172               175.   80.2              79.4    39
+##  5     10117 Male     181               183.  116.              113.     32
+##  6     10237 Male     185               188.   95.4              95.7    23
+##  7     10242 Male     178.              178.   99.5              99.8    36
+##  8     10244 Male     181.              183.   70.2              72.6    23
+##  9     10246 Male     178               178.   88.2              88.5    32
+## 10     10260 Male     173.              175.   70.1              70.3    28
+## # i 128 more rows
+## # i 1 more variable: race <dbl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w10 }\OtherTok{\textless{}{-}} \FunctionTok{slice}\NormalTok{(weight\_data, }\SpecialCharTok{{-}}\NormalTok{(}\DecValTok{2}\SpecialCharTok{:}\DecValTok{40}\NormalTok{)) }\CommentTok{\# returns all but rows 2 through 40 inclusive}
+\NormalTok{w10}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6,029 x 8
+##    subjectid gender height height_selfreport weight weight_selfreport   age
+##        <dbl> <chr>   <dbl>             <dbl>  <dbl>             <dbl> <dbl>
+##  1     10027 Male     178.              180.   81.5              81.7    41
+##  2     10427 Male     174.              178.   57.5              61.3    25
+##  3     10447 Male     168.              170.   87.6              85.3    44
+##  4     10451 Male     184.              185.   85                79.4    19
+##  5     10460 Male     173               173.   86.5              86.2    24
+##  6     10467 Male     176.              178.   95.8              97.5    33
+##  7     10471 Male     167.              168.   66.7              65.8    21
+##  8     10473 Male     174               175.   70.6              70.3    29
+##  9     10482 Male     171.              175.   84.7              83.9    31
+## 10     10495 Male     188.              190.  101.              101.     39
+## # i 6,019 more rows
+## # i 1 more variable: race <dbl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w11 }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(weight\_data, gender }\SpecialCharTok{==} \StringTok{\textquotesingle{}female\textquotesingle{}}\NormalTok{, age }\SpecialCharTok{\textless{}} \DecValTok{40}\NormalTok{) }\CommentTok{\# include observations of women under 40 years old}
+\NormalTok{w11}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 0 x 8
+## # i 8 variables: subjectid <dbl>, gender <chr>, height <dbl>,
+## #   height_selfreport <dbl>, weight <dbl>, weight_selfreport <dbl>, age <dbl>,
+## #   race <dbl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w12 }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(weight\_data, weight }\SpecialCharTok{\textgreater{}} \DecValTok{100} \SpecialCharTok{|}\NormalTok{ weight }\SpecialCharTok{\textless{}} \DecValTok{75}\NormalTok{) }\CommentTok{\# include observations that are over 100 kg or under 75 kg}
+\NormalTok{w12}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3,092 x 8
+##    subjectid gender height height_selfreport weight weight_selfreport   age
+##        <dbl> <chr>   <dbl>             <dbl>  <dbl>             <dbl> <dbl>
+##  1     10032 Male     170.              173.   72.6              72.6    35
+##  2     10117 Male     181               183.  116.              113.     32
+##  3     10244 Male     181.              183.   70.2              72.6    23
+##  4     10260 Male     173.              175.   70.1              70.3    28
+##  5     10265 Male     181.              183.  104.              104.     36
+##  6     10272 Male     186.              190.  112.              113.     26
+##  7     10312 Male     178               180.   71.4              74.9    28
+##  8     10319 Male     168               168.   74.6              74.0    24
+##  9     10341 Male     163               163.   67.5              61.3    32
+## 10     10349 Male     182.              185.  107.              104.     30
+## # i 3,082 more rows
+## # i 1 more variable: race <dbl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{calculate\_bmi }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(w,h)\{ w}\SpecialCharTok{/}\NormalTok{((h}\SpecialCharTok{/}\DecValTok{100}\NormalTok{)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) \}}
+\FunctionTok{mutate}\NormalTok{(weight\_data, }\AttributeTok{bmi =} \FunctionTok{calculate\_bmi}\NormalTok{(weight,height)) }\CommentTok{\# adds bmi col using cutsom function}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6,068 x 9
+##    subjectid gender height height_selfreport weight weight_selfreport   age
+##        <dbl> <chr>   <dbl>             <dbl>  <dbl>             <dbl> <dbl>
+##  1     10027 Male     178.              180.   81.5              81.7    41
+##  2     10032 Male     170.              173.   72.6              72.6    35
+##  3     10033 Male     174.              173.   92.9              93.0    42
+##  4     10092 Male     166.              168.   79.4              79.4    31
+##  5     10093 Male     191.              196.   94.6              96.6    21
+##  6     10115 Male     172               175.   80.2              79.4    39
+##  7     10117 Male     181               183.  116.              113.     32
+##  8     10237 Male     185               188.   95.4              95.7    23
+##  9     10242 Male     178.              178.   99.5              99.8    36
+## 10     10244 Male     181.              183.   70.2              72.6    23
+## # i 6,058 more rows
+## # i 2 more variables: race <dbl>, bmi <dbl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weight\_data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6,068 x 8
+##    subjectid gender height height_selfreport weight weight_selfreport   age
+##        <dbl> <chr>   <dbl>             <dbl>  <dbl>             <dbl> <dbl>
+##  1     10027 Male     178.              180.   81.5              81.7    41
+##  2     10032 Male     170.              173.   72.6              72.6    35
+##  3     10033 Male     174.              173.   92.9              93.0    42
+##  4     10092 Male     166.              168.   79.4              79.4    31
+##  5     10093 Male     191.              196.   94.6              96.6    21
+##  6     10115 Male     172               175.   80.2              79.4    39
+##  7     10117 Male     181               183.  116.              113.     32
+##  8     10237 Male     185               188.   95.4              95.7    23
+##  9     10242 Male     178.              178.   99.5              99.8    36
+## 10     10244 Male     181.              183.   70.2              72.6    23
+## # i 6,058 more rows
+## # i 1 more variable: race <dbl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w13 }\OtherTok{\textless{}{-}} \FunctionTok{arrange}\NormalTok{(weight\_data, height, weight) }\CommentTok{\# arranges data by height and then weight in ascending order}
+\NormalTok{w13}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6,068 x 8
+##    subjectid gender height height_selfreport weight weight_selfreport   age
+##        <dbl> <chr>   <dbl>             <dbl>  <dbl>             <dbl> <dbl>
+##  1     20429 Female   141.              142.   42.6              45.4    27
+##  2     18454 Female   144.              145.   47.8              47.6    20
+##  3     20093 Female   144.              142.   58.5              59.0    29
+##  4     27070 Female   144.              145.   46.7              45.4    35
+##  5     10222 Female   145.              142.   48.8              48.5    23
+##  6     18333 Female   145.              145.   68.3              67.2    36
+##  7     15160 Female   145.              150.   73.6              68.1    22
+##  8     25764 Female   146.              147.   44.5              46.7    21
+##  9     18126 Female   146.              145.   51.9              53.5    31
+## 10     29284 Female   146.              147.   62.6              61.7    20
+## # i 6,058 more rows
+## # i 1 more variable: race <dbl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{w14 }\OtherTok{\textless{}{-}} \FunctionTok{arrange}\NormalTok{(weight\_data, }\FunctionTok{desc}\NormalTok{(height), }\FunctionTok{desc}\NormalTok{(weight)) }\CommentTok{\# arrranges data by height and then weight both in descending order}
+\NormalTok{w14}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6,068 x 8
+##    subjectid gender height height_selfreport weight weight_selfreport   age
+##        <dbl> <chr>   <dbl>             <dbl>  <dbl>             <dbl> <dbl>
+##  1     27557 Male     199.              198.   94.7              99.8    27
+##  2     27992 Male     198               201.  102.              102.     25
+##  3     23270 Male     198.              203.   92.2              95.3    25
+##  4     27316 Male     197.              198.  109.              107.     31
+##  5     20601 Male     197               198.  120.              123.     33
+##  6     11453 Male     197               198.   90.2              91.2    33
+##  7     14094 Male     197.              201.   89.7              93.0    28
+##  8     22118 Male     197.              203.   87.3              90.7    20
+##  9     29207 Male     196               198.   98.1              98.9    38
+## 10     10339 Male     196.              201.   91.5              97.5    26
+## # i 6,058 more rows
+## # i 1 more variable: race <dbl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summarize}\NormalTok{(weight\_data,}
+          \AttributeTok{mean\_height =} \FunctionTok{mean}\NormalTok{(height, }\AttributeTok{na.rm =}\NormalTok{ T),}
+          \AttributeTok{median\_height =} \FunctionTok{mean}\NormalTok{(height, }\AttributeTok{na.rm =}\NormalTok{ T),}
+          \AttributeTok{sd\_height =} \FunctionTok{sd}\NormalTok{(height, }\AttributeTok{na.rm =}\NormalTok{ T))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   mean_height median_height sd_height
+##         <dbl>         <dbl>     <dbl>
+## 1        171.          171.      9.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weight\_by\_race }\OtherTok{\textless{}{-}} \FunctionTok{group\_by}\NormalTok{(weight\_data, race)}
+\NormalTok{weight\_by\_race}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6,068 x 8
+## # Groups:   race [7]
+##    subjectid gender height height_selfreport weight weight_selfreport   age
+##        <dbl> <chr>   <dbl>             <dbl>  <dbl>             <dbl> <dbl>
+##  1     10027 Male     178.              180.   81.5              81.7    41
+##  2     10032 Male     170.              173.   72.6              72.6    35
+##  3     10033 Male     174.              173.   92.9              93.0    42
+##  4     10092 Male     166.              168.   79.4              79.4    31
+##  5     10093 Male     191.              196.   94.6              96.6    21
+##  6     10115 Male     172               175.   80.2              79.4    39
+##  7     10117 Male     181               183.  116.              113.     32
+##  8     10237 Male     185               188.   95.4              95.7    23
+##  9     10242 Male     178.              178.   99.5              99.8    36
+## 10     10244 Male     181.              183.   70.2              72.6    23
+## # i 6,058 more rows
+## # i 1 more variable: race <dbl>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weight\_pivot }\OtherTok{\textless{}{-}} \FunctionTok{pivot\_longer}\NormalTok{(weight\_data, }\AttributeTok{cols =}\NormalTok{ height}\SpecialCharTok{:}\NormalTok{weight\_selfreport, }\AttributeTok{names\_to =} \StringTok{\textquotesingle{}measure\_type\textquotesingle{}}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{\textquotesingle{}cm\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{chapter-4}{%
+\subsection{CHAPTER 4}\label{chapter-4}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{titantic\_df }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"C:}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Users}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{janna}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{OneDrive}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Documents}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{DSE5001}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Week 2}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{TitanicSurvival.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## New names:
+## Rows: 1309 Columns: 5
+## -- Column specification
+## -------------------------------------------------------- Delimiter: "," chr
+## (4): ...1, survived, sex, passengerClass dbl (1): age
+## i Use `spec()` to retrieve the full column specification for this data. i
+## Specify the column types or set `show_col_types = FALSE` to quiet this message.
+## * `` -> `...1`
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create bar chart showing survival by passeneger class}
+\FunctionTok{ggplot}\NormalTok{(titantic\_df,}
+       \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ passengerClass, }\AttributeTok{fill =}\NormalTok{ survived)}
+\NormalTok{) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{annand_DSE5001_assignment2_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create histogram of distribution of ages in Titantic passengers}
+\FunctionTok{ggplot}\NormalTok{(titantic\_df,}
+       \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ age, }\AttributeTok{fill =}\NormalTok{ survived)}
+\NormalTok{) }\SpecialCharTok{+} \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{5}\NormalTok{, }\AttributeTok{colour =} \StringTok{\textquotesingle{}white\textquotesingle{}}\NormalTok{, }
+                   \AttributeTok{position =} \StringTok{\textquotesingle{}fill\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 263 rows containing non-finite values (`stat_bin()`).
+\end{verbatim}
+
+\includegraphics{annand_DSE5001_assignment2_files/figure-latex/unnamed-chunk-3-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Box plot of heights by gender}
+\FunctionTok{ggplot}\NormalTok{(weight\_data,}
+       \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ gender, }\AttributeTok{y =}\NormalTok{ height)}
+\NormalTok{) }\SpecialCharTok{+} \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.25}\NormalTok{, }\AttributeTok{outlier.shape =} \ConstantTok{NA}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{coord\_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{annand_DSE5001_assignment2_files/figure-latex/unnamed-chunk-3-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{carprice\_df }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"C:}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Users}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{janna}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{OneDrive}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Documents}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{DSE5001}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Week 2}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{carprice.csv"}\NormalTok{)}
+
+\CommentTok{\# Scatter plot showing relationship between price and city mpg for cars that are not vans}
+\NormalTok{carprice\_filtered }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(carprice\_df, Type }\SpecialCharTok{!=} \StringTok{\textquotesingle{}Van\textquotesingle{}}\NormalTok{)}
+\NormalTok{carprice\_filtered}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     X    Type Min.Price Price Max.Price Range.Price RoughRange gpm100 MPG.city
+## 1   6 Midsize      14.2  15.7      17.3         3.1       3.09    3.8       22
+## 2   7   Large      19.9  20.8      21.7         1.8       1.79    4.2       19
+## 3   8   Large      22.6  23.7      24.9         2.3       2.31    4.9       16
+## 4   9 Midsize      26.3  26.3      26.3         0.0      -0.01    4.3       19
+## 5  10   Large      33.0  34.7      36.3         3.3       3.30    4.9       16
+## 6  11 Midsize      37.5  40.1      42.7         5.2       5.18    4.9       16
+## 7  12 Compact       8.5  13.4      18.3         9.8       9.80    3.3       25
+## 8  13 Compact      11.4  11.4      11.4         0.0      -0.01    3.4       25
+## 9  14  Sporty      13.4  15.1      16.8         3.4       3.38    4.2       19
+## 10 15 Midsize      13.4  15.9      18.4         5.0       5.01    4.0       21
+## 11 18   Large      18.0  18.8      19.6         1.6       1.60    4.7       17
+## 12 19  Sporty      34.6  38.0      41.5         6.9       6.88    4.8       17
+## 13 20   Large      18.4  18.4      18.4         0.0      -0.01    4.2       20
+## 14 21 Compact      14.5  15.8      17.1         2.6       2.59    3.9       23
+## 15 22   Large      29.5  29.5      29.5         0.0       0.02    4.3       20
+## 16 23   Small       7.9   9.2      10.6         2.7       2.68    3.2       29
+## 17 24   Small       8.4  11.3      14.2         5.8       5.80    3.8       23
+## 18 25 Compact      11.9  13.3      14.7         2.8       2.81    4.1       22
+## 19 27 Midsize      14.8  15.6      16.4         1.6       1.60    4.2       21
+## 20 28  Sporty      18.5  25.8      33.1        14.6      14.60    4.8       18
+## 21 29   Small       7.9  12.2      16.5         8.6       8.60    3.2       29
+## 22 30   Large      17.5  19.3      21.2         3.7       3.69    4.2       20
+## 23 31   Small       6.9   7.4       7.9         1.0       1.00    3.1       31
+## 24 32   Small       8.4  10.1      11.9         3.5       3.49    3.8       23
+## 25 33 Compact      10.4  11.3      12.2         1.8       1.82    4.1       22
+## 26 34  Sporty      10.8  15.9      21.0        10.2      10.21    3.9       22
+## 27 35  Sporty      12.8  14.0      15.2         2.4       2.40    3.7       24
+## 28 37 Midsize      15.6  20.2      24.8         9.2       9.21    3.9       21
+## 29 38   Large      20.1  20.9      21.7         1.6       1.59    4.5       18
+## 30 51 Midsize      33.3  34.3      35.3         2.0       1.99    4.7       17
+## 31 52   Large      34.4  36.1      37.8         3.4       3.42    4.5       18
+## 32 60  Sporty      13.3  14.1      15.0         1.7       1.71    4.1       23
+## 33 61 Midsize      14.9  14.9      14.9         0.0      -0.02    4.4       19
+## 34 68 Compact      13.0  13.5      14.0         1.0       0.99    3.6       24
+## 35 69 Midsize      14.2  16.3      18.4         4.2       4.19    3.7       23
+## 36 71   Large      19.5  20.7      21.9         2.4       2.41    4.2       19
+## 37 72  Sporty      11.4  14.4      17.4         6.0       6.01    3.8       23
+## 38 73   Small       8.2   9.0       9.9         1.7       1.69    2.8       31
+## 39 74 Compact       9.4  11.1      12.8         3.4       3.39    3.7       23
+## 40 75  Sporty      14.0  17.7      21.4         7.4       7.40    4.2       19
+## 41 76 Midsize      15.4  18.5      21.6         6.2       6.19    4.3       19
+## 42 77   Large      19.4  24.4      29.4        10.0      10.00    4.2       19
+## 43 79   Small       9.2  11.1      12.9         3.7       3.70    3.0       28
+##    MPG.highway
+## 1           31
+## 2           28
+## 3           25
+## 4           27
+## 5           25
+## 6           25
+## 7           36
+## 8           34
+## 9           28
+## 10          29
+## 11          26
+## 12          25
+## 13          28
+## 14          28
+## 15          26
+## 16          33
+## 17          29
+## 18          27
+## 19          27
+## 20          24
+## 21          33
+## 22          28
+## 23          33
+## 24          30
+## 25          27
+## 26          29
+## 27          30
+## 28          30
+## 29          26
+## 30          26
+## 31          26
+## 32          26
+## 33          26
+## 34          31
+## 35          31
+## 36          28
+## 37          30
+## 38          41
+## 39          31
+## 40          28
+## 41          27
+## 42          28
+## 43          38
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(carprice\_filtered,}
+       \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{MPG.city, }\AttributeTok{y=}\NormalTok{Price, }\AttributeTok{colour =}\NormalTok{ Type)}
+\NormalTok{) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{annand_DSE5001_assignment2_files/figure-latex/unnamed-chunk-3-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Facet plot by gender of bar graphs for survival by passenger class}
+\FunctionTok{ggplot}\NormalTok{(titantic\_df,}
+       \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ passengerClass, }\AttributeTok{fill =}\NormalTok{ survived)}
+\NormalTok{) }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \StringTok{\textquotesingle{}dodge\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{sex)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{annand_DSE5001_assignment2_files/figure-latex/unnamed-chunk-3-5.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create facet plot with subplots of relationship between Reaction and time in Days for each subject}
+\NormalTok{sleepstudy\_df }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"C:}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Users}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{janna}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{OneDrive}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Documents}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{DSE5001}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{Week 2}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{sleepstudy.csv"}\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(sleepstudy\_df,}
+       \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Days, }\AttributeTok{y =}\NormalTok{ Reaction, }\AttributeTok{colour =}\NormalTok{ Subject)}
+\NormalTok{) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{\textquotesingle{}lm\textquotesingle{}}\NormalTok{, }\AttributeTok{se =}\NormalTok{ F) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{Subject) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{\textquotesingle{}none\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics{annand_DSE5001_assignment2_files/figure-latex/unnamed-chunk-3-6.pdf}
+
+\hypertarget{chapter-5}{%
+\subsection{CHAPTER 5}\label{chapter-5}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{check\_excess\_kurtosis }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+  \ControlFlowTok{if}\NormalTok{(x }\SpecialCharTok{{-}} \FloatTok{3.0} \SpecialCharTok{\textgreater{}} \FloatTok{0.2}\NormalTok{) \{}
+  \StringTok{\textquotesingle{}leptokurtic\textquotesingle{}}
+\NormalTok{\} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (x }\SpecialCharTok{{-}} \FloatTok{3.0} \SpecialCharTok{\textless{}} \SpecialCharTok{{-}}\FloatTok{0.2}\NormalTok{) \{}
+  \StringTok{\textquotesingle{}platykurtic\textquotesingle{}}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \StringTok{\textquotesingle{}mesokurtic\textquotesingle{}}
+\NormalTok{\}}
+\NormalTok{\}}
+
+\NormalTok{unfiltered\_height\_summ }\OtherTok{\textless{}{-}} \FunctionTok{summarize}\NormalTok{(weight\_data, }\AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(height, }\AttributeTok{na.rm=}\NormalTok{T), }\AttributeTok{median =} \FunctionTok{median}\NormalTok{(height, }\AttributeTok{na.rm=}\NormalTok{T), }\AttributeTok{sd =} \FunctionTok{sd}\NormalTok{(height, }\AttributeTok{na.rm=}\NormalTok{T), }\AttributeTok{mad =} \FunctionTok{mad}\NormalTok{(height, }\AttributeTok{na.rm=}\NormalTok{T), }\AttributeTok{iqr =} \FunctionTok{IQR}\NormalTok{(height), }\AttributeTok{skewness =}\NormalTok{ psych}\SpecialCharTok{::}\FunctionTok{skew}\NormalTok{(height), }\AttributeTok{kurtosis =}\NormalTok{ moments}\SpecialCharTok{::}\FunctionTok{kurtosis}\NormalTok{(height)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{excessKurtosis =} \FunctionTok{check\_excess\_kurtosis}\NormalTok{(kurtosis))}
+
+\NormalTok{unfiltered\_height\_summ}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 8
+##    mean median    sd   mad   iqr skewness kurtosis excessKurtosis
+##   <dbl>  <dbl> <dbl> <dbl> <dbl>    <dbl>    <dbl> <chr>         
+## 1  171.   172.  9.00  9.34  12.7   -0.107     2.69 platykurtic
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(weight\_data,}
+       \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \StringTok{\textquotesingle{}\textquotesingle{}}\NormalTok{, }\AttributeTok{y =}\NormalTok{ height)}
+\NormalTok{) }\SpecialCharTok{+} \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{coord\_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{annand_DSE5001_assignment2_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(weight\_data,}
+       \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ height),}
+\NormalTok{) }\SpecialCharTok{+} \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{2.54}\NormalTok{, }\AttributeTok{colour =} \StringTok{\textquotesingle{}white\textquotesingle{}}\NormalTok{,}
+                   \AttributeTok{fill =} \StringTok{\textquotesingle{}darkblue\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{annand_DSE5001_assignment2_files/figure-latex/unnamed-chunk-4-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{heights\_by\_gender }\OtherTok{\textless{}{-}} \FunctionTok{group\_by}\NormalTok{(weight\_data, gender)}
+\NormalTok{gender\_heights\_summ }\OtherTok{\textless{}{-}} \FunctionTok{summarize}\NormalTok{(heights\_by\_gender, }\AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(height, }\AttributeTok{na.rm=}\NormalTok{T), }\AttributeTok{median =} \FunctionTok{median}\NormalTok{(height, }\AttributeTok{na.rm=}\NormalTok{T), }\AttributeTok{sd =} \FunctionTok{sd}\NormalTok{(height, }\AttributeTok{na.rm=}\NormalTok{T), }\AttributeTok{mad =} \FunctionTok{mad}\NormalTok{(height, }\AttributeTok{na.rm=}\NormalTok{T), }\AttributeTok{iqr =} \FunctionTok{IQR}\NormalTok{(height), }\AttributeTok{skewness =}\NormalTok{ psych}\SpecialCharTok{::}\FunctionTok{skew}\NormalTok{(height), }\AttributeTok{kurtosis =}\NormalTok{ moments}\SpecialCharTok{::}\FunctionTok{kurtosis}\NormalTok{(height)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{excessKurtosis =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    (kurtosis }\SpecialCharTok{{-}} \FloatTok{3.0}\NormalTok{) }\SpecialCharTok{\textgreater{}} \FloatTok{0.2} \SpecialCharTok{\textasciitilde{}} \StringTok{\textquotesingle{}leptokurtic\textquotesingle{}}\NormalTok{,}
+\NormalTok{    (kurtosis }\SpecialCharTok{{-}} \FloatTok{3.0}\NormalTok{) }\SpecialCharTok{\textless{}} \SpecialCharTok{{-}}\FloatTok{0.2} \SpecialCharTok{\textasciitilde{}} \StringTok{\textquotesingle{}platykurtic\textquotesingle{}}\NormalTok{,}
+\NormalTok{    (kurtosis }\SpecialCharTok{{-}} \FloatTok{3.0}\NormalTok{) }\SpecialCharTok{\textless{}} \FloatTok{0.2} \SpecialCharTok{\&}\NormalTok{ (kurtosis }\SpecialCharTok{{-}} \FloatTok{3.0}\NormalTok{) }\SpecialCharTok{\textgreater{}} \SpecialCharTok{{-}}\FloatTok{0.2} \SpecialCharTok{\textasciitilde{}} \StringTok{\textquotesingle{}mesokurtic\textquotesingle{}}
+\NormalTok{  ))}
+
+\NormalTok{gender\_heights\_summ}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 9
+##   gender  mean median    sd   mad   iqr skewness kurtosis excessKurtosis
+##   <chr>  <dbl>  <dbl> <dbl> <dbl> <dbl>    <dbl>    <dbl> <chr>         
+## 1 Female  163.   163.  6.42  6.23  8.57   0.0875     3.00 mesokurtic    
+## 2 Male    176.   176.  6.86  6.82  9.20   0.111      3.07 mesokurtic
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(weight\_data,}
+       \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ gender, }\AttributeTok{y =}\NormalTok{ height)}
+\NormalTok{) }\SpecialCharTok{+} \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{coord\_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{annand_DSE5001_assignment2_files/figure-latex/unnamed-chunk-4-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(weight\_data,}
+       \AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{height)}
+\NormalTok{) }\SpecialCharTok{+} \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{2.54}\NormalTok{, }\AttributeTok{colour =} \StringTok{\textquotesingle{}white\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{gender)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{annand_DSE5001_assignment2_files/figure-latex/unnamed-chunk-4-4.pdf}
+
+\end{document}

@@ -1,0 +1,167 @@
+---
+title: "annand_DSE5001_assignment2"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+date: "2023-05-19"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Import libraries
+```{r}
+library(readr)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(psych)
+library(moments)
+```
+
+## CHAPTER 3
+```{r}
+weight_data <- read_csv("C:\\Users\\janna\\OneDrive\\Documents\\DSE5001\\Week 2\\weight.csv")
+w1 <- select(weight_data, subjectid, height, weight, age) # returns specific columns
+w1
+w2 <- select(weight_data, subjectid, height:age) # returns subjectid col and all cols between height and age (inclusive)
+w2
+w3 <- select(weight_data, -weight_selfreport) # return data frame without weight_selfreport col
+w3
+w4 <- select(weight_data, starts_with("w")) # returns all cols that start with w
+w4
+w5 <- select(weight_data, ends_with("t")) # returns all cols that end in t
+w5
+w6 <- select(weight_data, matches('^h|t$')) # returns cols that start with h or end in t
+w6
+
+w7 <- rename(weight_data, gender_identity=gender, ethnicity=race) # renames cols
+w7
+
+w8 <- slice(weight_data, c(10,20,30,40,100)) # returns rows 10,20,30,40,and 100
+w8
+w9 <- slice(weight_data, 3:140) # returns rows 3 through 140 inclusive
+w9
+w10 <- slice(weight_data, -(2:40)) # returns all but rows 2 through 40 inclusive
+w10
+
+w11 <- filter(weight_data, gender == 'female', age < 40) # include observations of women under 40 years old
+w11
+w12 <- filter(weight_data, weight > 100 | weight < 75) # include observations that are over 100 kg or under 75 kg
+w12
+
+calculate_bmi <- function(w,h){ w/((h/100)^2) }
+mutate(weight_data, bmi = calculate_bmi(weight,height)) # adds bmi col using cutsom function
+weight_data
+
+w13 <- arrange(weight_data, height, weight) # arranges data by height and then weight in ascending order
+w13
+w14 <- arrange(weight_data, desc(height), desc(weight)) # arrranges data by height and then weight both in descending order
+w14
+
+summarize(weight_data,
+          mean_height = mean(height, na.rm = T),
+          median_height = mean(height, na.rm = T),
+          sd_height = sd(height, na.rm = T))
+
+weight_by_race <- group_by(weight_data, race)
+weight_by_race
+
+weight_pivot <- pivot_longer(weight_data, cols = height:weight_selfreport, names_to = 'measure_type', values_to = 'cm')
+
+```
+
+## CHAPTER 4
+```{r}
+titantic_df <- read_csv("C:\\Users\\janna\\OneDrive\\Documents\\DSE5001\\Week 2\\TitanicSurvival.csv")
+
+# Create bar chart showing survival by passeneger class
+ggplot(titantic_df,
+       mapping = aes(x = passengerClass, fill = survived)
+) + geom_bar()
+
+# Create histogram of distribution of ages in Titantic passengers
+ggplot(titantic_df,
+       mapping = aes(x = age, fill = survived)
+) + geom_histogram(binwidth = 5, colour = 'white', 
+                   position = 'fill')
+
+# Box plot of heights by gender
+ggplot(weight_data,
+       mapping = aes(x = gender, y = height)
+) + geom_boxplot(width = 0.25, outlier.shape = NA) + coord_flip()
+
+carprice_df <- read.csv("C:\\Users\\janna\\OneDrive\\Documents\\DSE5001\\Week 2\\carprice.csv")
+
+# Scatter plot showing relationship between price and city mpg for cars that are not vans
+carprice_filtered <- filter(carprice_df, Type != 'Van')
+carprice_filtered
+ggplot(carprice_filtered,
+       mapping = aes(x=MPG.city, y=Price, colour = Type)
+) + geom_point(size = 0.5)
+
+# Facet plot by gender of bar graphs for survival by passenger class
+ggplot(titantic_df,
+       mapping = aes(x = passengerClass, fill = survived)
+) + geom_bar(position = 'dodge') +
+  facet_wrap(~sex)
+
+# Create facet plot with subplots of relationship between Reaction and time in Days for each subject
+sleepstudy_df <- read.csv("C:\\Users\\janna\\OneDrive\\Documents\\DSE5001\\Week 2\\sleepstudy.csv")
+
+ggplot(sleepstudy_df,
+       mapping = aes(x = Days, y = Reaction, colour = Subject)
+) + geom_point() +
+  geom_smooth(method = 'lm', se = F) +
+  facet_wrap(~Subject) +
+  theme_minimal() +
+  theme(legend.position = 'none')
+```
+
+## CHAPTER 5
+```{r}
+
+check_excess_kurtosis <- function(x) {
+  if(x - 3.0 > 0.2) {
+  'leptokurtic'
+} else if (x - 3.0 < -0.2) {
+  'platykurtic'
+} else {
+  'mesokurtic'
+}
+}
+
+unfiltered_height_summ <- summarize(weight_data, mean = mean(height, na.rm=T), median = median(height, na.rm=T), sd = sd(height, na.rm=T), mad = mad(height, na.rm=T), iqr = IQR(height), skewness = psych::skew(height), kurtosis = moments::kurtosis(height)) %>%
+  mutate(excessKurtosis = check_excess_kurtosis(kurtosis))
+
+unfiltered_height_summ
+
+ggplot(weight_data,
+       mapping = aes(x = '', y = height)
+) + geom_boxplot() + coord_flip()
+
+ggplot(weight_data,
+       mapping = aes(x = height),
+) + geom_histogram(binwidth = 2.54, colour = 'white',
+                   fill = 'darkblue')
+
+heights_by_gender <- group_by(weight_data, gender)
+gender_heights_summ <- summarize(heights_by_gender, mean = mean(height, na.rm=T), median = median(height, na.rm=T), sd = sd(height, na.rm=T), mad = mad(height, na.rm=T), iqr = IQR(height), skewness = psych::skew(height), kurtosis = moments::kurtosis(height)) %>%
+  mutate(excessKurtosis = case_when(
+    (kurtosis - 3.0) > 0.2 ~ 'leptokurtic',
+    (kurtosis - 3.0) < -0.2 ~ 'platykurtic',
+    (kurtosis - 3.0) < 0.2 & (kurtosis - 3.0) > -0.2 ~ 'mesokurtic'
+  ))
+
+gender_heights_summ
+
+ggplot(weight_data,
+       mapping = aes(x = gender, y = height)
+) + geom_boxplot() + coord_flip()
+
+ggplot(weight_data,
+       mapping = aes(x=height)
+) + geom_histogram(binwidth = 2.54, colour = 'white') + facet_wrap(~gender)
+```

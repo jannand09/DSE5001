@@ -1,0 +1,164 @@
+---
+title: "Lab 4: Normal Distribution"
+author: "Joseph Annand"
+date: "`r Sys.Date()`"
+output: openintro::lab_report
+---
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(openintro)
+head(fastfood)
+fastfood$restaurant
+```
+
+```{r}
+mcdonalds <- fastfood %>%
+  filter(restaurant == "Mcdonalds")
+dairy_queen <- fastfood %>%
+  filter(restaurant == "Dairy Queen")
+```
+
+normal_plot <- function(food_data, mean = 0, sd = 1, ...) {
+# X grid for non-standard normal distribution
+x <- food_data 
+
+# Density function
+f <- dnorm(x, mean, sd)
+
+plot(x, f, type = "l", lwd = 2, col = "blue", ylab = "", xlab = "cal_fat", ...)
+abline(v = mean) # Vertical line on the mean
+}
+
+### Exercise 1
+
+The Dairy Queen distribution centers around 200, while the McDonald's distribution centers around 250. The spread for the McDonald's distribution is much larger, with a longer right tail that goes to 1250. Both plot show a bell shape in their distributions.
+
+```{r}
+ggplot(dairy_queen,
+       mapping = aes(x = cal_fat),
+) + geom_histogram(binwidth = 20.0, colour = 'white',
+                   fill = 'tomato')
+
+ggplot(mcdonalds,
+       mapping = aes(x = cal_fat),
+) + geom_histogram(binwidth = 20.0, colour = 'white',
+                   fill = 'limegreen')
+
+```
+
+
+
+### Exercise 2
+
+Both curves are bell-shaped and unimodal. The Dairy Queen curve is fairly symmetric and appears close to normal. The McDonald's curve appears to be right-skewed and not very normal.
+
+```{r}
+mcmean <- mean(mcdonalds$cal_fat)
+mcsd <- sd(mcdonalds$cal_fat)
+
+dqmean <- mean(dairy_queen$cal_fat)
+dqsd <- sd(dairy_queen$cal_fat)
+
+ggplot(data = dairy_queen, aes(x = cal_fat)) +
+  geom_blank() +
+  geom_histogram(aes(y = after_stat(density))) +
+  stat_function(fun = dnorm, args = c(mean = dqmean, sd = dqsd), col = "tomato")
+
+ggplot(data = mcdonalds, aes(x = cal_fat)) +
+  geom_blank() +
+  geom_histogram(aes(y = after_stat(density))) +
+  stat_function(fun = dnorm, args = c(mean = mcmean, sd = mcsd), col = "limegreen")
+```
+
+
+### Exercise 3
+
+All the points in the Q-Q plot of the simulated data do not fall on the line. Compared to probability plot for the real data, the simulated data probability plot has a similar range of points that are on or close to the line around the center. At the higher end of the graph, the points drift above the line. While the points on the real data plot remain near the line on the lower end of the graph, the points on the simulated data plot drift below the line in the same area.
+
+```{r}
+ggplot(data = dairy_queen, aes(sample = cal_fat)) +
+  # used stat_qq instead of geom_line(stat = "qq")
+  stat_qq(colour = "tomato") +
+  stat_qq_line()
+
+sim_norm <- rnorm(n = nrow(dairy_queen), mean = dqmean, sd = dqsd)
+
+ggplot(mapping = aes(sample = sim_norm)) +
+  stat_qq() +
+  stat_qq_line()
+```
+
+
+### Exercise 4
+
+The real data plot appears very similar to all of the simulated data plots. The comparisons provide evidence that the real data for Dairy Queen's calories form fat are nearly normal.
+
+```{r}
+qqnormsim(sample = cal_fat, data = dairy_queen)
+```
+
+
+### Exercise 5
+
+The Q-Q plot for the real data differs from that of the simulated data. The skewness of the real data can be seen in the higher end of the graph where several points deviate above the line. This skewness is not seen in the Q-Q plot for the simulated data, as the points in the same area are on or close to the line. The simulated data plots do not show evidence that the real data is nearly normal due to the difference at the higher end of the graph.
+
+```{r}
+ggplot(data = mcdonalds, aes(sample = cal_fat)) +
+  stat_qq(colour = "limegreen") +
+  stat_qq_line()
+
+mc_sim_norm <- rnorm(n = nrow(mcdonalds), mean = mcmean, sd = mcsd)
+
+ggplot(mapping = aes(sample = mc_sim_norm)) +
+  stat_qq() +
+  stat_qq_line()
+
+qqnormsim(sample = cal_fat, data = mcdonalds)
+```
+
+
+### Exercise 6
+
+What is the probability of a random Taco Bell product has more than 10 grams of protein?
+
+pnorm method : 0.8507232
+empirical method: 0.826087	
+
+What is the probability of a random Sonic product has less than 10 grams of sugar?
+
+pnorm method: 0.8105874
+empirical method: 0.7924528		
+
+The probabilities for a random Sonic product having less than 10 grams of sugar are closer than those for a Taco Bell prodyuct having more than 10 grams of protein.
+
+```{r plot-prop-boys-present}
+1 - pnorm(q = 600, mean = dqmean, sd = dqsd)
+
+dairy_queen %>%
+  filter(cal_fat > 600) %>%
+  summarise(percent = n() / nrow(dairy_queen))
+
+# What is the probability of a random Taco Bell product has more than 10 grams of protein?
+taco_bell <- fastfood %>%
+  filter(restaurant == "Taco Bell")
+
+1 - pnorm(q = 10, mean = mean(taco_bell$protein), sd = sd(taco_bell$protein))
+
+taco_bell %>%
+  filter(protein > 10) %>%
+  summarise(percent = n() / nrow(taco_bell))
+
+# What is the probability of a random Sonic product has less than 10 grams of sugar?
+sonic <- fastfood %>%
+  filter(restaurant == "Sonic")
+
+pnorm(q = 10, mean = mean(sonic$sugar), sd = sd(sonic$sugar))
+
+sonic %>%
+  filter (sugar < 10) %>%
+  summarise(percent = n() / nrow(sonic))
+```
+
+```
+

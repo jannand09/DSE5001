@@ -1,0 +1,224 @@
+---
+title: "Annand DSE5001 Assignment 7"
+author: "Joseph Annand"
+date: "2023-06-24"
+output:
+  word_document: default
+  html_document: default
+---
+This assignment includes OpenIntro Chapter exercises 8.6, 8.22, and 8.32, followed by the Chapter 8 Lab.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Load Packages
+
+```{r}
+library(tidyverse)
+library(openintro)
+library('statsr')
+library('broom')
+```
+
+# Question 8.6
+
+## Part A
+
+There is a positive relationship between husband's age and wife's age, meaning that generally as husband's age increases, wife's age increases, too.
+
+## Part B
+
+There is a positive relationship between husband's height and wife's height, meaning that generally taller husbands will have taller wives and vice versa.
+
+## Part C
+
+The age plot shows a stronger correlation. The data points are closer together and form a more linear shape.
+
+## Part D
+
+No, the conversion will not affect the correlation. Since both variables are adjusted by the same conversion factor, the shape of the plot is unchanged.
+
+# Question 8.22
+
+## Part A
+
+The relationship between the number of calories and amount of carbohydrates appears to be that, generally, the amount of carbohydrates increases with the number of calories; food menu items with higher calories will generally have more carbohydrates.
+
+## Part B
+
+Calories is the explanatory variable, and carbs is the response variable.
+
+## Part C
+
+We may want to fit a regression to this data to determine how strong the relationship is between calorie content and carbs in a food menu item. If the regression line shows that there is a strong relationship between the two variables, then we may use the regression to predict amount of carbohydrates based on calorie content. If not, then we may need to look for another variable to predict carbohydrates.
+
+## Part D
+
+The data does show a linear trend between number of calories and amount of carbohydrates. The residuals appear to be nearly normal based on their distribution plot. The observations of different food menu items are independent. The residual plot, however, suggests that the variability of the errors are related to the value of the x variable, number of calories. Therefore, all conditions required for fitting a least squares line are not met.
+
+# Question 8.32
+
+## Part A
+
+There is positive, linear relationship between cans of beer and blood alcohol. As the number of cans of beer drank increases, BAC increases.
+
+## Part B
+
+y = -0.0127 + 0.0180*x
+
+The intercept tells us that a student who drank zero cans of beer would have a BAC of -0.0127 grams per deciliter. The slope tells us that for each can of beer a student drinks, their BAC increases by 0.0180 grams per deciliter.
+
+## Part C
+
+Null hypothesis: Drinking more cans of beer is not associated with an increase in blood alcohol.
+
+Alternate hypothesis: Drinking more cans of beer is associated with an increase in blood alcohol.
+
+The p-value for the beer variable is so low that we may reject the null hypothesis and conclude that drinking more cans of beer is associated with an increase in blood alcohol.
+
+## Part D
+
+```{r}
+bac <- 0.89
+
+r_squared <- 0.89 ^ 2
+r_squared
+```
+The R-squared value tells us the strength of the linear relationship between the number of cans of beers drank and blood alcohol. It describes how much of the variation of blood alcohol is explained by the least squares line. In this case, 79.21% of the variation in blood alcohol is explained by the number of cans of beer drank.
+
+## Part E
+
+No, the relationship will not be as strong. The surveyed population will likely be more diverse than the group of 16 students who volunteered for the initial study. With a more diverse, other variables; like gender, weight, and drinking habits; will have a greater effect of the variation in blood alcohol and the r-squared value will be lower.
+
+# Chapter 8 Lab
+
+## Excercise 1
+
+```{r}
+# Display data set
+hfi
+```
+
+The data set is a 1,458 rows x 123 columns tibble. Each row represents a different country.
+
+## Exercise 2
+
+```{r}
+# Filter data to have only information from the year 2016
+hfi_2016 <- filter(hfi, year == 2016)
+hfi_2016
+```
+
+## Exercise 3
+
+```{r}
+# Create a scatter plot with expression control on x-axis and personal freedom score on the y axis using 2016 data from all countries
+ggplot(hfi_2016, 
+       mapping = aes(x = pf_expression_control, y = pf_score)
+) + geom_point(size = 1.0)
+
+# Determine correlation coefficient of the two variables from scatter plot
+hfi_2016 %>%
+  summarise(cor(pf_expression_control, pf_score))
+```
+
+We use a scatter plot to display the relationship between the personal freedom score and expression control since we are comparing two continuous variables. The relationship does appear to be linear. The correlation coefficient shows a strong, positive, and linear relationship between the two variables. This suggests that a linear model may be applied to try to predict personal freedom score. To be comfortable with actually using the model, the model should be evaluated using inference and/or a hypothesis test.
+
+## Exercise 4
+
+The relationship appears to be linear. The relationship is positive, meaning as pf_expression_control increases, personal freedom score also increases. The correlation coefficient is 0.85 and suggest that the relationship is strong. The variability of the data seems to be greater in the lower end of the plot than in the higher end of the plot, which may inhibit applying a linear model.
+
+## Exercise 5
+
+```{r}
+# Create interactive plot to find minimum sum of squares through trial and error
+plot_ss(x = pf_expression_control, y = pf_score, data = hfi_2016, showSquares = TRUE)
+```
+
+The smallest sum of squares I got during the interactive exercise was 6505.454 with an intercept of 11.2388 and x of 0.4062. 
+
+## Exercise 6
+
+```{r}
+# Create linear model that uses least squares regression for total human freedom using expression control as predictor variable
+m1 <- lm(hf_score ~ pf_expression_control, data = hfi_2016)
+
+# Get information on the model
+tidy(m1)
+
+# Get r-squared value
+glance(m1)
+```
+
+The equation of the regression line is y = 5.05 + 0.368 * x. The slope tells us that for every one unit that pf_expression_control increases, the total human freedom score increases by 0.368 units.
+
+## Exercise 7
+
+```{r}
+# Create linear regression for personal freedom using expression control as predictor variable
+m2 <- lm(pf_score ~ pf_expression_control, data = hfi_2016)
+
+# Plot the linear regression
+ggplot(data = hfi_2016, aes(x = pf_expression_control, y = pf_score)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+They could predict a country's personal freedom score by using the equation of the line and set x equal to 3.
+
+```{r}
+# Find predicted personal freedom score given that expression control is 3
+y_hat <- 4.28 + 0.542 * 3
+y_hat
+```
+
+```{r}
+# Find observation in data set where expression control is equal to 3
+select(hfi_2016, countries, pf_score, pf_expression_control) %>%
+  filter(pf_expression_control == 3)
+```
+
+The model predicts that a country with a pf_expression_control of 3 will have a pf_score of 5.906. We can see from our actual data set that the Central African Republic, which has a pf_expression_control of 3, has a pf_score of 5.47.
+
+```{r}
+# Determine residual
+res_3 <- 5.47 - 5.906
+res_3
+```
+
+The residual for this prediction is -0.436, so the model overestimated.
+
+## Exercise 8
+
+```{r}
+# augment calculated predicted values and residuals
+m2_aug <- augment(m2)
+```
+
+```{r}
+# Create a residual plot using m2 predicted values and residuals
+ggplot(data = m2_aug, aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+  xlab("Fitted values") +
+  ylab("Residuals")
+```
+
+The residual plot shows that the points are distributed around zero and there is no apparent curvature, so the linearity condition is satisfied.
+
+## Exercise 9
+
+```{r}
+# Create a histogram showing the normal distribution for residuals
+ggplot(data = m2_aug, aes(x = .resid)) +
+  geom_histogram(binwidth = 0.25, color = "white") +
+  xlab("Residuals")
+```
+
+The residuals do not appear to be nearly normally distributed. Based on the histogram, the distribution is left-skewed.
+
+## Exercise 10
+
+The constant variability condition does appear to be violated. The variability of the pf_score is greater at lower pf_expression_control values.
+
